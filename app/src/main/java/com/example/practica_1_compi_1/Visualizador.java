@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentResultListener;
 
+import java.io.StringReader;
+import com.example.gramatica.exercise;
+import com.example.gramatica.parser;
+
 public class Visualizador extends Fragment {
     private TextView txtResultado;
     private Button button2;
@@ -33,6 +37,16 @@ public class Visualizador extends Fragment {
                 String txtEntradaDatos;
                 txtEntradaDatos = result.getString("txtEntradaDatos");
                 txtResultado.setText(txtEntradaDatos);
+
+                try {
+                    StringReader sr = new StringReader(txtEntradaDatos);
+                    exercise lexico = new exercise(sr);
+                    parser pars = new parser(lexico);
+
+                    pars.parse();
+                } catch (Exception ex) {
+                    System.out.println("Error irrecuperrable");
+                }
             }
         });
         //txtResultado.setText("dato recibido: ");

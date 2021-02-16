@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
 }
-
+repositories {
+    mavenCentral()
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -40,4 +42,7 @@ dependencies {
 
     //API de Framgente
     implementation 'androidx.fragment:fragment:1.3.0'
+    //CUP
+    compile 'com.github.vbmacher:java-cup:11b'
 }
+
