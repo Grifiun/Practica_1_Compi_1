@@ -29,42 +29,44 @@ public class exercise implements java_cup.runtime.Scanner {
    *                  at the beginning of a line
    * l is of the form l = 2*k, k a non negative integer
    */
-  private static final int ZZ_LEXSTATE[] = { 
-     0, 0
+  private static final int ZZ_LEXSTATE[] = {
+          0, 0
   };
 
-  /** 
+  /**
    * Translates characters to character classes
    */
-  private static final String ZZ_CMAP_PACKED = 
-    "\52\0\1\4\1\2\1\0\1\3\1\0\1\5\12\1\u0626\0\12\1"+
-    "\206\0\12\1\306\0\12\1\u019c\0\12\1\166\0\12\1\166\0\12\1"+
-    "\166\0\12\1\166\0\12\1\166\0\12\1\166\0\12\1\166\0\12\1"+
-    "\166\0\12\1\166\0\12\1\140\0\12\1\166\0\12\1\106\0\12\1"+
-    "\u0116\0\12\1\106\0\12\1\u0746\0\12\1\46\0\12\1\u012c\0\12\1"+
-    "\200\0\12\1\246\0\12\1\6\0\12\1\266\0\12\1\126\0\12\1"+
-    "\206\0\12\1\6\0\12\1\u89c6\0\12\1\u02a6\0\12\1\46\0\12\1"+
-    "\306\0\12\1\26\0\12\1\126\0\12\1\u0196\0\12\1\u5316\0\12\1"+
-    "\u0586\0\12\1\u0bbc\0\12\1\200\0\12\1\74\0\12\1\220\0\12\1"+
-    "\u0116\0\12\1\u0156\0\12\1\166\0\12\1\u0176\0\12\1\146\0\12\1"+
-    "\146\0\12\1\u01a6\0\12\1\u0366\0\12\1\u4e06\0\12\1\346\0\12\1"+
-    "\u6c74\0\62\1\u1150\0\12\1\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\u16b5\0";
+  private static final String ZZ_CMAP_PACKED =
+          "\10\0\3\1\1\0\2\1\22\0\1\1\7\0\1\10\1\11\1\6"+
+                  "\1\4\1\0\1\5\1\3\1\7\12\2\u0626\0\12\2\206\0\12\2"+
+                  "\306\0\12\2\u019c\0\12\2\166\0\12\2\166\0\12\2\166\0\12\2"+
+                  "\166\0\12\2\166\0\12\2\166\0\12\2\166\0\12\2\166\0\12\2"+
+                  "\166\0\12\2\140\0\12\2\166\0\12\2\106\0\12\2\u0116\0\12\2"+
+                  "\106\0\12\2\u0746\0\12\2\46\0\12\2\u012c\0\12\2\200\0\12\2"+
+                  "\246\0\12\2\6\0\12\2\266\0\12\2\126\0\12\2\206\0\12\2"+
+                  "\6\0\12\2\u89c6\0\12\2\u02a6\0\12\2\46\0\12\2\306\0\12\2"+
+                  "\26\0\12\2\126\0\12\2\u0196\0\12\2\u5316\0\12\2\u0586\0\12\2"+
+                  "\u0bbc\0\12\2\200\0\12\2\74\0\12\2\220\0\12\2\u0116\0\12\2"+
+                  "\u0156\0\12\2\166\0\12\2\u0176\0\12\2\146\0\12\2\146\0\12\2"+
+                  "\u01a6\0\12\2\u0366\0\12\2\u4e06\0\12\2\346\0\12\2\u6c74\0\62\2"+
+                  "\u1150\0\12\2\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\u16b5\0";
 
-  /** 
+  /**
    * Translates characters to character classes
    */
   private static final char [] ZZ_CMAP = zzUnpackCMap(ZZ_CMAP_PACKED);
 
-  /** 
+  /**
    * Translates DFA states to action switch labels.
    */
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\1\1\2\1\1\1\3\1\4\1\5\1\6";
+          "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
+                  "\1\10\1\11\1\0\1\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[7];
+    int [] result = new int[12];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -83,16 +85,17 @@ public class exercise implements java_cup.runtime.Scanner {
   }
 
 
-  /** 
+  /**
    * Translates a state to a row index in the transition table
    */
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\6\0\14\0\6\0\6\0\6\0\6";
+          "\0\0\0\12\0\12\0\24\0\12\0\12\0\12\0\12"+
+                  "\0\12\0\12\0\36\0\36";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[7];
+    int [] result = new int[12];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -109,17 +112,17 @@ public class exercise implements java_cup.runtime.Scanner {
     return j;
   }
 
-  /** 
+  /**
    * The transition table of the DFA
    */
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\1\5\1\6\1\7\7\0\1\3"+
-    "\4\0";
+          "\1\2\1\3\1\4\1\2\1\5\1\6\1\7\1\10"+
+                  "\1\11\1\12\14\0\1\4\1\13\10\0\1\14\7\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[18];
+    int [] result = new int[40];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -146,9 +149,9 @@ public class exercise implements java_cup.runtime.Scanner {
 
   /* error messages for the codes above */
   private static final String ZZ_ERROR_MSG[] = {
-    "Unknown internal scanner error",
-    "Error: could not match input",
-    "Error: pushback value was too large"
+          "Unknown internal scanner error",
+          "Error: could not match input",
+          "Error: pushback value was too large"
   };
 
   /**
@@ -157,10 +160,10 @@ public class exercise implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\1\1\11\1\1\4\11";
+          "\1\0\2\11\1\1\6\11\1\0\1\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[7];
+    int [] result = new int[12];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -188,7 +191,7 @@ public class exercise implements java_cup.runtime.Scanner {
   private int zzLexicalState = YYINITIAL;
 
   /** this buffer contains the current text to be matched and is
-      the source of the yytext() string */
+   the source of the yytext() string */
   private char zzBuffer[] = new char[ZZ_BUFFERSIZE];
 
   /** the textposition at the last accepting state */
@@ -201,7 +204,7 @@ public class exercise implements java_cup.runtime.Scanner {
   private int zzStartRead;
 
   /** endRead marks the last character in the buffer, that has been read
-      from input */
+   from input */
   private int zzEndRead;
 
   /** number of newlines encountered up to the start of the matched text */
@@ -211,12 +214,12 @@ public class exercise implements java_cup.runtime.Scanner {
   private int yychar;
 
   /**
-   * the number of characters from the last newline up to the start of the 
+   * the number of characters from the last newline up to the start of the
    * matched text
    */
   private int yycolumn;
 
-  /** 
+  /**
    * zzAtBOL == true iff the scanner is currently at the beginning of a line
    */
   private boolean zzAtBOL = true;
@@ -226,8 +229,8 @@ public class exercise implements java_cup.runtime.Scanner {
 
   /** denotes if the user-EOF-code has already been executed */
   private boolean zzEOFDone;
-  
-  /** 
+
+  /**
    * The number of occupied positions in zzBuffer beyond zzEndRead.
    * When a lead/high surrogate has been read from the input stream
    * into the final zzBuffer position, this will have a value of 1;
@@ -236,14 +239,8 @@ public class exercise implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
-    private int resultado = 0;
-    private void setResultado(int num) {
-        resultado = num;
-    }
 
-    private int getResultado() {
-        return resultado;
-    }
+////////////////
 
 
   /**
@@ -256,7 +253,7 @@ public class exercise implements java_cup.runtime.Scanner {
   }
 
 
-  /** 
+  /**
    * Unpacks the compressed character translation table.
    *
    * @param packed   the packed character translation table
@@ -266,7 +263,7 @@ public class exercise implements java_cup.runtime.Scanner {
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 260) {
+    while (i < 276) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -279,7 +276,7 @@ public class exercise implements java_cup.runtime.Scanner {
    * Refills the input buffer.
    *
    * @return      <code>false</code>, iff there was new input.
-   * 
+   *
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
   private boolean zzRefill() throws java.io.IOException {
@@ -289,8 +286,8 @@ public class exercise implements java_cup.runtime.Scanner {
       zzEndRead += zzFinalHighSurrogate;
       zzFinalHighSurrogate = 0;
       System.arraycopy(zzBuffer, zzStartRead,
-                       zzBuffer, 0,
-                       zzEndRead-zzStartRead);
+              zzBuffer, 0,
+              zzEndRead-zzStartRead);
 
       /* translate stored positions */
       zzEndRead-= zzStartRead;
@@ -336,7 +333,7 @@ public class exercise implements java_cup.runtime.Scanner {
     return true;
   }
 
-    
+
   /**
    * Closes the input stream.
    */
@@ -353,13 +350,13 @@ public class exercise implements java_cup.runtime.Scanner {
    * Resets the scanner to read from a new input stream.
    * Does not close the old reader.
    *
-   * All internal variables are reset, the old input stream 
+   * All internal variables are reset, the old input stream
    * <b>cannot</b> be reused (internal buffer is discarded and lost).
    * Lexical state is set to <tt>ZZ_INITIAL</tt>.
    *
    * Internal scan buffer is resized down to its initial length, if it has grown.
    *
-   * @param reader   the new input stream 
+   * @param reader   the new input stream
    */
   public final void yyreset(java.io.Reader reader) {
     zzReader = reader;
@@ -403,12 +400,12 @@ public class exercise implements java_cup.runtime.Scanner {
 
 
   /**
-   * Returns the character at position <tt>pos</tt> from the 
-   * matched text. 
-   * 
+   * Returns the character at position <tt>pos</tt> from the
+   * matched text.
+   *
    * It is equivalent to yytext().charAt(pos), but faster
    *
-   * @param pos the position of the character to fetch. 
+   * @param pos the position of the character to fetch.
    *            A value from 0 to yylength()-1.
    *
    * @return the character at position pos
@@ -429,8 +426,8 @@ public class exercise implements java_cup.runtime.Scanner {
   /**
    * Reports an error that occured while scanning.
    *
-   * In a wellformed scanner (no or only correct usage of 
-   * yypushback(int) and a match-all fallback rule) this method 
+   * In a wellformed scanner (no or only correct usage of
+   * yypushback(int) and a match-all fallback rule) this method
    * will only be called with things that "Can't Possibly Happen".
    * If this method is called, something is seriously wrong
    * (e.g. a JFlex bug producing a faulty scanner etc.).
@@ -450,7 +447,7 @@ public class exercise implements java_cup.runtime.Scanner {
     }
 
     throw new Error(message);
-  } 
+  }
 
 
   /**
@@ -515,31 +512,31 @@ public class exercise implements java_cup.runtime.Scanner {
         zzCh = Character.codePointAt(zzBufferL, zzCurrentPosL, zzMarkedPosL);
         zzCharCount = Character.charCount(zzCh);
         switch (zzCh) {
-        case '\u000B':  // fall through
-        case '\u000C':  // fall through
-        case '\u0085':  // fall through
-        case '\u2028':  // fall through
-        case '\u2029':
-          yyline++;
-          yycolumn = 0;
-          zzR = false;
-          break;
-        case '\r':
-          yyline++;
-          yycolumn = 0;
-          zzR = true;
-          break;
-        case '\n':
-          if (zzR)
-            zzR = false;
-          else {
+          case '\u000B':  // fall through
+          case '\u000C':  // fall through
+          case '\u0085':  // fall through
+          case '\u2028':  // fall through
+          case '\u2029':
             yyline++;
             yycolumn = 0;
-          }
-          break;
-        default:
-          zzR = false;
-          yycolumn += zzCharCount;
+            zzR = false;
+            break;
+          case '\r':
+            yyline++;
+            yycolumn = 0;
+            zzR = true;
+            break;
+          case '\n':
+            if (zzR)
+              zzR = false;
+            else {
+              yyline++;
+              yycolumn = 0;
+            }
+            break;
+          default:
+            zzR = false;
+            yycolumn += zzCharCount;
         }
       }
 
@@ -555,9 +552,9 @@ public class exercise implements java_cup.runtime.Scanner {
           zzEndReadL = zzEndRead;
           zzMarkedPosL = zzMarkedPos;
           zzBufferL = zzBuffer;
-          if (eof) 
+          if (eof)
             zzPeek = false;
-          else 
+          else
             zzPeek = zzBufferL[zzMarkedPosL] == '\n';
         }
         if (zzPeek) yyline--;
@@ -565,7 +562,7 @@ public class exercise implements java_cup.runtime.Scanner {
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
-  
+
       zzState = ZZ_LEXSTATE[zzLexicalState];
 
       // set up zzAction for empty match case:
@@ -577,7 +574,7 @@ public class exercise implements java_cup.runtime.Scanner {
 
       zzForAction: {
         while (true) {
-    
+
           if (zzCurrentPosL < zzEndReadL) {
             zzInput = Character.codePointAt(zzBufferL, zzCurrentPosL, zzEndReadL);
             zzCurrentPosL += Character.charCount(zzInput);
@@ -624,43 +621,141 @@ public class exercise implements java_cup.runtime.Scanner {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
-            zzDoEOF();
-          { return new java_cup.runtime.Symbol(sym.EOF); }
+        zzDoEOF();
+        { return new java_cup.runtime.Symbol(sym.EOF); }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
-          case 1: 
-            { return new Symbol(ENTERO, yyline + 1, yycolumn+1);
-            } 
-            // fall through
-          case 7: break;
-          case 2: 
-            { 
-            } 
-            // fall through
-          case 8: break;
-          case 3: 
-            { return new Symbol(SUMA, yyline + 1, yycolumn+1);
-            } 
-            // fall through
-          case 9: break;
-          case 4: 
-            { return new Symbol(RESTA, yyline + 1, yycolumn+1);
-            } 
-            // fall through
+          case 1:
+          {
+          }
+          // fall through
           case 10: break;
-          case 5: 
-            { return new Symbol(MULTIPLICACION, yyline + 1, yycolumn+1);
-            } 
-            // fall through
+          case 2:
+          { /*  */
+          }
+          // fall through
           case 11: break;
-          case 6: 
-            { return new Symbol(DIVISION, yyline + 1, yycolumn+1);
-            } 
-            // fall through
+          case 3:
+          { return new Symbol(ENTERO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          }
+          // fall through
           case 12: break;
+          case 4:
+          { return new Symbol(SUMA, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 13: break;
+          case 5:
+          { return new Symbol(RESTA, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 14: break;
+          case 6:
+          { return new Symbol(MULTIPLICACION, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 15: break;
+          case 7:
+          { return new Symbol(DIVISION, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 16: break;
+          case 8:
+          { return new Symbol(PARENTESISA, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 17: break;
+          case 9:
+          { return new Symbol(PARENTESISB, yyline + 1, yycolumn+1);
+          }
+          // fall through
+          case 18: break;
           default:
             zzScanError(ZZ_NO_MATCH);
+        }
+      }
+    }
+  }
+
+  /**
+   * Converts an int token code into the name of the
+   * token by reflection on the cup symbol class/interface sym
+   *
+   * This code was contributed by Karl Meissner <meissnersd@yahoo.com>
+   */
+  private String getTokenName(int token) {
+    try {
+      java.lang.reflect.Field [] classFields = sym.class.getFields();
+      for (int i = 0; i < classFields.length; i++) {
+        if (classFields[i].getInt(null) == token) {
+          return classFields[i].getName();
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace(System.err);
+    }
+
+    return "UNKNOWN TOKEN";
+  }
+
+  /**
+   * Same as next_token but also prints the token to standard out
+   * for debugging.
+   *
+   * This code was contributed by Karl Meissner <meissnersd@yahoo.com>
+   */
+  public java_cup.runtime.Symbol debug_next_token() throws java.io.IOException {
+    java_cup.runtime.Symbol s = next_token();
+    System.out.println( "line:" + (yyline+1) + " col:" + (yycolumn+1) + " --"+ yytext() + "--" + getTokenName(s.sym) + "--");
+    return s;
+  }
+
+  /**
+   * Runs the scanner on input files.
+   *
+   * This main method is the debugging routine for the scanner.
+   * It prints debugging information about each returned token to
+   * System.out until the end of file is reached, or an error occured.
+   *
+   * @param argv   the command line, contains the filenames to run
+   *               the scanner on.
+   */
+  public static void main(String argv[]) {
+    if (argv.length == 0) {
+      System.out.println("Usage : java exercise [ --encoding <name> ] <inputfile(s)>");
+    }
+    else {
+      int firstFilePos = 0;
+      String encodingName = "UTF-8";
+      if (argv[0].equals("--encoding")) {
+        firstFilePos = 2;
+        encodingName = argv[1];
+        try {
+          java.nio.charset.Charset.forName(encodingName); // Side-effect: is encodingName valid?
+        } catch (Exception e) {
+          System.out.println("Invalid encoding '" + encodingName + "'");
+          return;
+        }
+      }
+      for (int i = firstFilePos; i < argv.length; i++) {
+        exercise scanner = null;
+        try {
+          java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
+          java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
+          scanner = new exercise(reader);
+          while ( !scanner.zzAtEOF ) scanner.debug_next_token();
+        }
+        catch (java.io.FileNotFoundException e) {
+          System.out.println("File not found : \""+argv[i]+"\"");
+        }
+        catch (java.io.IOException e) {
+          System.out.println("IO error scanning file \""+argv[i]+"\"");
+          System.out.println(e);
+        }
+        catch (Exception e) {
+          System.out.println("Unexpected exception:");
+          e.printStackTrace();
         }
       }
     }

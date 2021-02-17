@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentResultListener;
-
-import java.io.StringReader;
 import com.example.gramatica.exercise;
 import com.example.gramatica.parser;
+import java.io.StringReader;
 
 public class Visualizador extends Fragment {
     private TextView txtResultado;
@@ -34,9 +33,9 @@ public class Visualizador extends Fragment {
         getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String txtEntradaDatos;
+                String txtEntradaDatos = "";
                 txtEntradaDatos = result.getString("txtEntradaDatos");
-                txtResultado.setText(txtEntradaDatos);
+
 
                 try {
                     StringReader sr = new StringReader(txtEntradaDatos);
@@ -44,8 +43,11 @@ public class Visualizador extends Fragment {
                     parser pars = new parser(lexico);
 
                     pars.parse();
+
+                    txtEntradaDatos = pars.resultado;
+                    txtResultado.setText(txtEntradaDatos);
                 } catch (Exception ex) {
-                    System.out.println("Error irrecuperrable");
+                    System.out.println("Error irrecuperrable: "+ex);
                 }
             }
         });

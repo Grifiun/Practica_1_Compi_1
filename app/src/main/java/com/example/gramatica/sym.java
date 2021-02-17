@@ -8,21 +8,24 @@ package com.example.gramatica;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int MULTIPLICACION = 5;
-  public static final int RESTA = 4;
-  public static final int error = 1;
   public static final int SUMA = 3;
-  public static final int DIVISION = 6;
-  public static final int EOF = 0;
   public static final int ENTERO = 2;
+  public static final int PARENTESISB = 8;
+  public static final int PARENTESISA = 7;
+  public static final int MULTIPLICACION = 5;
+  public static final int EOF = 0;
+  public static final int error = 1;
+  public static final int DIVISION = 6;
+  public static final int RESTA = 4;
   public static final String[] terminalNames = new String[] {
-  "EOF",
-  "error",
-  "ENTERO",
-  "SUMA",
-  "RESTA",
-  "MULTIPLICACION",
-  "DIVISION"
+          "EOF",
+          "error",
+          "ENTERO",
+          "SUMA",
+          "RESTA",
+          "MULTIPLICACION",
+          "DIVISION",
+          "PARENTESISA",
+          "PARENTESISB"
   };
 }
-
