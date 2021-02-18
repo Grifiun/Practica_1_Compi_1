@@ -8,21 +8,48 @@ package com.example.gramatica;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int LINEA = 15;
   public static final int MULTIPLICACION = 5;
-  public static final int RESTA = 4;
-  public static final int error = 1;
-  public static final int SUMA = 3;
   public static final int DIVISION = 6;
+  public static final int SUMA = 3;
+  public static final int CURVA = 11;
+  public static final int ANIMAR = 18;
+  public static final int COLOR = 10;
+  public static final int CUADRADO = 13;
+  public static final int OBJETO = 19;
+  public static final int GRAFICAR = 17;
+  public static final int COMA = 9;
   public static final int EOF = 0;
+  public static final int error = 1;
+  public static final int POLIGONO = 16;
+  public static final int CIRCULO = 12;
   public static final int ENTERO = 2;
+  public static final int ANTERIOR = 20;
+  public static final int PARENTESISB = 8;
+  public static final int PARENTESISA = 7;
+  public static final int RECTANGULO = 14;
+  public static final int RESTA = 4;
   public static final String[] terminalNames = new String[] {
-  "EOF",
-  "error",
-  "ENTERO",
-  "SUMA",
-  "RESTA",
-  "MULTIPLICACION",
-  "DIVISION"
+          "EOF",
+          "error",
+          "ENTERO",
+          "SUMA",
+          "RESTA",
+          "MULTIPLICACION",
+          "DIVISION",
+          "PARENTESISA",
+          "PARENTESISB",
+          "COMA",
+          "COLOR",
+          "CURVA",
+          "CIRCULO",
+          "CUADRADO",
+          "RECTANGULO",
+          "LINEA",
+          "POLIGONO",
+          "GRAFICAR",
+          "ANIMAR",
+          "OBJETO",
+          "ANTERIOR"
   };
 }
-
