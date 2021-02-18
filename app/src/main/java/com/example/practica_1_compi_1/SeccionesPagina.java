@@ -35,7 +35,7 @@ public class SeccionesPagina extends FragmentPagerAdapter {
             return fragmento;
         } else {
             System.out.println("\nFrag 1");
-            Visualizador fragmento = new Visualizador();
+            Visualizador fragmento = new Visualizador(mContext);
             return fragmento;
         }
     }

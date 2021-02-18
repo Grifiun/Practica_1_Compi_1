@@ -1,4 +1,4 @@
-package com.example.gramatica;
+package com.example.DAO;
 
 public class Token {
     private final String lexema;
