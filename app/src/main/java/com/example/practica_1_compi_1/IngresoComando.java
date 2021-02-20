@@ -12,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.gramatica.exercise;
+import com.example.gramatica.parser;
+
+import java.io.StringReader;
+
 public class IngresoComando extends Fragment {
     private EditText txtEntradaDatos;
     private Button btnDibujar;
@@ -43,7 +48,6 @@ public class IngresoComando extends Fragment {
                 datosEnviar.putString("txtEntradaDatos", txtEntradaDatos.getText().toString().trim());
                 //Empaquetamos la informacion
                 getParentFragmentManager().setFragmentResult("key", datosEnviar);
-                txtEntradaDatos.setText("Dato enviado: " + datosEnviar.getString("txtEntradaDatos"));
 
 
             }

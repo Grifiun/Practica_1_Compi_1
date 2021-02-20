@@ -15,7 +15,7 @@ import org.w3c.dom.ls.LSOutput;
 public class SeccionesPagina extends FragmentPagerAdapter {
     private static final String ARG_SECTION_NUMBER = "section_number";
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
 
     public SeccionesPagina(Context context, FragmentManager fm) {
@@ -33,9 +33,13 @@ public class SeccionesPagina extends FragmentPagerAdapter {
             System.out.println("\nFrag 0");
             IngresoComando fragmento = new IngresoComando();
             return fragmento;
-        } else {
+        } else if(position == 1){
             System.out.println("\nFrag 1");
             Visualizador fragmento = new Visualizador(mContext);
+            return fragmento;
+        } else{
+            System.out.println("\nFrag 2");
+            MostrarToken fragmento = new MostrarToken(mContext);
             return fragmento;
         }
     }
@@ -49,6 +53,6 @@ public class SeccionesPagina extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return 3;
     }
 }
