@@ -25,7 +25,7 @@ public class GraficarFiguraLinea extends GraficarFigura{
         //COLOR
         paint.setColor(getColor(linea.getColor()));
 
-        canvas.drawLine(linea.getPosX(), linea.getPosY(), linea.getPosY1(), linea.getPosX1(), paint);
+        canvas.drawLine(linea.getPosX(), linea.getPosY(), linea.getPosX1(), linea.getPosY1(), paint);
         //posX, posY, posX1, posY
 
     }

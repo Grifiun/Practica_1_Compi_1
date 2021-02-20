@@ -2,6 +2,7 @@
     <string name="app_name">Graficador de figuras geometricas</string>
     <string name="tab_text_1">Entrada</string>
     <string name="tab_text_2">Visualizador</string>
+    <string name="tab_text_3">Tokens</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

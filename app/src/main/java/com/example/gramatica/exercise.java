@@ -5,6 +5,8 @@ package com.example.gramatica;
 import java_cup.runtime.*;
 import static com.example.gramatica.sym.*;
 import com.example.DAO.Token;
+import java.util.ArrayList;
+import java.util.List;
 
 /*Segunda seccion, config*/
 
@@ -284,7 +286,24 @@ public class exercise implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
-  ////////
+  //Creamos un listado de los operadores invocados
+  ArrayList<Token> listadoOperadoresInvocados = new ArrayList();
+  //Funciones
+  //retorna un simbolo despues de crear un nuevo token y agregarlo al listado
+  private Symbol retornarSimbolo(int tipo, String tipoToken, String lexema, int fila, int columna){
+    //creamos un  token auxiliar
+    Token tokenAux = new Token(tipoToken, lexema, fila, columna);
+    //Agregamos al listado
+    listadoOperadoresInvocados.add(tokenAux);
+    //retornamos el token aux como simbolo
+    return new Symbol(tipo, tokenAux);
+  }
+
+  public ArrayList<Token> obtenerListadoTokens(){
+
+    return listadoOperadoresInvocados;
+  }
+
 
 
   /**
@@ -681,97 +700,97 @@ public class exercise implements java_cup.runtime.Scanner {
           // fall through
           case 23: break;
           case 3:
-          { return new Symbol(ENTERO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(ENTERO         , "ENTERO"         , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 24: break;
           case 4:
-          { return new Symbol(SUMA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(SUMA           , "SUMA"           , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 25: break;
           case 5:
-          { return new Symbol(RESTA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(RESTA          , "RESTA"          , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 26: break;
           case 6:
-          { return new Symbol(MULTIPLICACION, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(MULTIPLICACION , "MULTIPLICACION" , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 27: break;
           case 7:
-          { return new Symbol(DIVISION, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(DIVISION       , "DIVISION"       , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 28: break;
           case 8:
-          { return new Symbol(PARENTESISA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(PARENTESISA    , "PARENTESISA"    , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 29: break;
           case 9:
-          { return new Symbol(PARENTESISB, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(PARENTESISB    , "PARENTESISB"    , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 30: break;
           case 10:
-          { return new Symbol(COMA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(COMA           , "COMA"           , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 31: break;
           case 11:
-          { return new Symbol(COLOR, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(COLOR          , "COLOR"          , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 32: break;
           case 12:
-          { return new Symbol(LINEA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(LINEA          , "LINEA"          , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 33: break;
           case 13:
-          { return new Symbol(CURVA, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(CURVA          , "CURVA"          , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 34: break;
           case 14:
-          { return new Symbol(ANIMAR, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(ANIMAR         , "ANIMAR"         , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 35: break;
           case 15:
-          { return new Symbol(OBJETO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(OBJETO         , "OBJETO"         , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 36: break;
           case 16:
-          { return new Symbol(CIRCULO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(CIRCULO        , "CIRCULO"        , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 37: break;
           case 17:
-          { return new Symbol(ANTERIOR, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(ANTERIOR       , "ANTERIOR"       , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 38: break;
           case 18:
-          { return new Symbol(CUADRADO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(CUADRADO       , "CUADRADO"       , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 39: break;
           case 19:
-          { return new Symbol(GRAFICAR, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(GRAFICAR       , "GRAFICAR"       , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 40: break;
           case 20:
-          { return new Symbol(POLIGONO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(POLIGONO       , "POLIGONO"       , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 41: break;
           case 21:
-          { return new Symbol(RECTANGULO, new Token(yytext(), yyline + 1, yycolumn + 1));
+          { return retornarSimbolo(RECTANGULO     , "RECTANGULO"     , yytext(), yyline + 1, yycolumn + 1);
           }
           // fall through
           case 42: break;

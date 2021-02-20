@@ -2,29 +2,56 @@ package com.example.DAO;
 
 public class Token {
     private final String lexema;
+    private String tipoToken;
     private final int linea;
     private final int columna;
 
-    public Token(String lexema, int linea, int columna) {
+    /**
+     * Constructor de los tokens
+     * se obtiene el tipo de token
+     * el lexema (valor del token)
+     * y las linea y col donde ocurre
+     * @param tipoToken
+     * @param lexema
+     * @param linea
+     * @param columna
+     */
+    public Token(String tipoToken, String lexema, int linea, int columna) {
+        this.tipoToken = tipoToken;
         this.lexema = lexema;
         this.linea = linea;
         this.columna = columna;
     }
 
-    public Token(int fila, int columna) {
-        this(null, fila, columna);
-    }
-
-
+    /**
+     * Se obtiene el valor (lexema ) del  token
+     * @return
+     */
     public String getLexema() {
         return lexema;
     }
 
+    /**
+     * Se obtiene la linea del token
+     * @return
+     */
     public int getLinea() {
         return linea;
     }
 
+    /**
+     * Se obtiene la columa del token
+     * @return
+     */
     public int getColumna() {
         return columna;
+    }
+
+    public String getTipoToken() {
+        return tipoToken;
+    }
+
+    public void setTipoToken(String tipoToken) {
+        this.tipoToken = tipoToken;
     }
 }
