@@ -34,9 +34,7 @@ public class Visualizador extends Fragment {
     private final String[] listaColors = {"azul", "rojo", "verde", "amarillo", "naranja", "morado", "cafe", "negro"};
     private final String[] listaFigura = {"circulo", "cuadrado", "rectangulo", "linea", "poligono"};
     private final String[] listaAnimaciones = {"curva", "linea"};
-
-
-
+    private Bundle datosEnviar = new Bundle();
 
     public Visualizador(Context mcontext){
         this.mContext = mcontext;
@@ -52,7 +50,7 @@ public class Visualizador extends Fragment {
         getParentFragmentManager().setFragmentResultListener("key", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-
+                datosEnviar.clear();//limpiamos los datos
                 String txtEntradaDatos = "";
                 txtEntradaDatos = result.getString("txtEntradaDatos");//Obtenemos la entrada de datos
 
@@ -63,15 +61,24 @@ public class Visualizador extends Fragment {
                     //Limpiamos todos las figuras, desde la posicion 1 hasta la ultima - 1 porque el titulo tambien se cuenta
                     parent.removeViews(1, parent.getChildCount() - 1);
                 }
+
                 try {
-                    //Ejecutamos el lexer y el parser
+                    //Ejecutamos el lexer
                     StringReader sr = new StringReader(txtEntradaDatos);
                     exercise lexico = new exercise(sr);
+                    //ejecutamos el parser
                     parser pars = new parser(lexico);
                     pars.parse();
+
+                    //Preparamos los datos de las tablas
+                    prepararDatosTabla(lexico.obtenerListadoTokens());
+                    //preparar Datos lexicos
+                    prepararErroresTabla(lexico.obtenerListadoErroresLexicos());
+                    //Enviamos los datos e
+                    // mpaquetados
+                    enviarPaqueteDatos();
                     //Graficar
                     graficarListadoFiguras(pars.listadoFiguras, parent);
-                    enviarDatosTabla(lexico.obtenerListadoTokens());
                 } catch (Exception ex) {
                     System.out.println("Error irrecuperrable: "+ex);
                 }
@@ -123,7 +130,7 @@ public class Visualizador extends Fragment {
      * @param listadoTokens
      * @return
      */
-    private void enviarDatosTabla (ArrayList<Token> listadoTokens){
+    private void prepararDatosTabla (ArrayList<Token> listadoTokens){
         ArrayList<String> listadoOperadores = new ArrayList<>();
         String colores = "";
         String figuras = "";
@@ -170,14 +177,50 @@ public class Visualizador extends Fragment {
         }
 
         //Enviamos el dato
-        Bundle datosEnviar = new Bundle();
         datosEnviar.putStringArrayList("operadores", listadoOperadores);
         datosEnviar.putStringArrayList("colores", contarSubstringsCadena(colores, listaColors));
         datosEnviar.putStringArrayList("figuras", contarSubstringsCadena(figuras, listaFigura));
         datosEnviar.putStringArrayList("animaciones", contarSubstringsCadena(animaciones, listaAnimaciones));
+
+    }
+
+    /**
+     * Preparamos el listado de errores lexicos
+     * @param listadoTokens
+     */
+    private  void prepararErroresTabla(ArrayList<TokenError> listadoTokens){
+        ArrayList<String> erroresLexicos = new ArrayList<>();
+
+        for(int i = 0; i < listadoTokens.size(); i++){
+            //Auxiliar de los tokens
+            TokenError tokenAux = listadoTokens.get(i);
+            //Si el token es un operador, lo agregamos al listado de errores lexicos
+            if(tokenAux.getTipoToken().equals("LEXICO")){
+
+                //creamos el auxiliar
+                String lexicoAuxiliar = "";
+                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getTipoToken() + "@";                  // TIPO ERROR (LEXEMA)
+                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getLexema()+ "@";                      // Valor del token
+                lexicoAuxiliar = lexicoAuxiliar + String.valueOf(tokenAux.getLinea()) + "@";      // LINEA
+                lexicoAuxiliar = lexicoAuxiliar + String.valueOf(tokenAux.getColumna()) + "@";    // COLUMNA
+                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getMsgError();                    // mensaje de error del token
+
+
+                //agregamos al listado de errores lexicos
+                erroresLexicos.add(lexicoAuxiliar);
+            }
+        }
+
+        //agregamos al bunlde
+        datosEnviar.putStringArrayList("lexicos", erroresLexicos);
+    }
+
+    /**
+     * Empaquetamos el bundle y lo enviamos
+     */
+    private void enviarPaqueteDatos(){
         //Empaquetamos la informacion
         getParentFragmentManager().setFragmentResult("key1", datosEnviar);
-
     }
 
     /**

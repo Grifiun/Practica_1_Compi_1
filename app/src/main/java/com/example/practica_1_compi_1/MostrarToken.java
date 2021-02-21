@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.example.gramatica.exercise;
 import com.example.gramatica.parser;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 public class MostrarToken extends Fragment {
     private Context mContext;
     private TableLayout tabla;
+    private TextView txtTitulo;
     private Button btnSiguiente;
     private int indexTabla = 0;
     private ArrayList<String[]> encabezados = new ArrayList<>();
@@ -36,8 +38,10 @@ public class MostrarToken extends Fragment {
     private ArrayList<String[]> datosColores = new ArrayList<>();
     private ArrayList<String[]> datosFiguras = new ArrayList<>();
     private ArrayList<String[]> datosAnimacion = new ArrayList<>();
+    private ArrayList<String[]> datosLexicos = new ArrayList<>();
+    private String[] titulos = {"Tokens operador", "Tokens color", "Tokens figuras", "Tokens animaciones", "Errores lexicos"};
 
-    private ArrayList<String> operadores, colores, figuras, animaciones;
+    private ArrayList<String> operadores, colores, figuras, animaciones, lexicos;
 
     public MostrarToken(Context mContext) {
         // Required empty public constructor
@@ -61,11 +65,13 @@ public class MostrarToken extends Fragment {
                 datosColores.clear();
                 datosFiguras.clear();
                 datosAnimacion.clear();
+                datosLexicos.clear();
 
-                operadores = result.getStringArrayList("operadores");//Obtenemos la entrada de datos
-                colores = result.getStringArrayList("colores");//Obtenemos la entrada de datos
-                figuras = result.getStringArrayList("figuras");//Obtenemos la entrada de datos
-                animaciones = result.getStringArrayList("animaciones");//Obtenemos la entrada de datos
+                operadores = result.getStringArrayList("operadores");//Obtenemos los operadores
+                colores = result.getStringArrayList("colores");//Obtenemos los colores
+                figuras = result.getStringArrayList("figuras");//Obtenemos las figuras
+                animaciones = result.getStringArrayList("animaciones");//Obtenemos las animaciones
+                lexicos = result.getStringArrayList("lexicos");//Obtenemos los errores lexicos
 
                 cargarDatosTabla(indexTabla);
             }
@@ -83,35 +89,45 @@ public class MostrarToken extends Fragment {
         TablaGenerica tabOperador = new TablaGenerica(tabla, mContext);
         tabOperador.setEncabezado(encabezados.get(indexTabla));
 
+        //Cambiamos el titulo
+        txtTitulo.setText(titulos[indexTabla]);
+
         //Cargamos los datos
         switch (indexTabla){
-            case 0:
+            case 0://Reporte de operadores
                 if(datosOperadores.isEmpty()){//si esta vacio
                     System.out.println("\nCARGA OPERADoRES");
                     datosOperadores = obtenerDatosTabla(operadores);
                 }
                 tabOperador.setDatos(datosOperadores);
                 break;
-            case 1:
+            case 1://Reporte de colores
                 if(datosColores.isEmpty()){//si esta vacio
                     System.out.println("\nCARGA colores");
                     datosColores = obtenerDatosTabla(colores);
                 }
                 tabOperador.setDatos(datosColores);
                 break;
-            case 2:
+            case 2://Reporte de figuras
                 if(datosFiguras.isEmpty()){//si esta vacio
                     System.out.println("\nCARGA figuras");
                     datosFiguras = obtenerDatosTabla(figuras);
                 }
                 tabOperador.setDatos(datosFiguras);
                 break;
-            case 3:
+            case 3://Reporte de animaciones
                 if(datosAnimacion.isEmpty()){//si esta vacio
                     System.out.println("\nCARGA animaciones");
                     datosAnimacion = obtenerDatosTabla(animaciones);
                 }
                 tabOperador.setDatos(datosAnimacion);
+                break;
+            case 4://Reporte de errores lexicos
+                if(datosLexicos.isEmpty()){//si esta vacio
+                    System.out.println("\nCARGA lexicos");
+                    datosLexicos = obtenerDatosTabla(lexicos);
+                }
+                tabOperador.setDatos(datosLexicos);
                 break;
         }
 
@@ -119,11 +135,14 @@ public class MostrarToken extends Fragment {
 
     public ArrayList<String[]> obtenerDatosTabla(ArrayList<String> listadaoAux){
         ArrayList<String[]> datosAux = new ArrayList<>();
-        for(String aux: listadaoAux){//separamos los datos de las animaciones
-            String[] auxArrString;
-            auxArrString = aux.split("@");//separamos por el signo de arroba
-            datosAux.add(auxArrString);
+        if(listadaoAux != null && listadaoAux.size() > 0){
+            for(String aux: listadaoAux){//separamos los datos de las animaciones
+                String[] auxArrString;
+                auxArrString = aux.split("@");//separamos por el signo de arroba
+                datosAux.add(auxArrString);
+            }
         }
+
         return datosAux;
     }
 
@@ -135,6 +154,7 @@ public class MostrarToken extends Fragment {
         encabezados.add(new String[] {"Color", "Cantidad de usos"});
         encabezados.add(new String[] {"Objeto", "Cantidad de usos"});
         encabezados.add(new String[] {"Animacion", "Cantidad de usos"});
+        encabezados.add(new String[] {"Error", "Lexema", "Fila", "Columna", "descripcion"});
     }
 
     @Override
@@ -148,6 +168,7 @@ public class MostrarToken extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tabla = view.findViewById(R.id.tabla);
+        txtTitulo = view.findViewById(R.id.txtTitulo);
         establecerEncabezados();
 
         btnSiguiente = view.findViewById(R.id.btnSiguiente);
@@ -155,7 +176,7 @@ public class MostrarToken extends Fragment {
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(indexTabla == 3){
+                if(indexTabla == 4){
                     indexTabla = 0;
                 }else{
                     indexTabla++;
