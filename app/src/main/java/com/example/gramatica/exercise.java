@@ -5,6 +5,7 @@ package com.example.gramatica;
 import java_cup.runtime.*;
 import static com.example.gramatica.sym.*;
 import com.example.DAO.Token;
+import com.example.DAO.TokenError;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,6 +289,8 @@ public class exercise implements java_cup.runtime.Scanner {
   /* user code: */
   //Creamos un listado de los operadores invocados
   ArrayList<Token> listadoOperadoresInvocados = new ArrayList();
+  ArrayList<TokenError> listadoErroresLexicos = new ArrayList();
+
   //Funciones
   //retorna un simbolo despues de crear un nuevo token y agregarlo al listado
   private Symbol retornarSimbolo(int tipo, String tipoToken, String lexema, int fila, int columna){
@@ -299,8 +302,21 @@ public class exercise implements java_cup.runtime.Scanner {
     return new Symbol(tipo, tokenAux);
   }
 
-  public ArrayList<Token> obtenerListadoTokens(){
+  //Agregamos un token al array list de errores lexicos
+  private void addErrorLexico(String tipoToken, String lexema, String msgError, int fila, int columna){
+    //creamos un  token auxiliar
+    TokenError tokenErrorAux = new TokenError(tipoToken, lexema, msgError, fila, columna);
+    //Agregamos al listado
+    listadoErroresLexicos.add(tokenErrorAux);
+  }
 
+  //Obtenemos el arrLust de los errores lexicos
+  public ArrayList<TokenError> obtenerListadoErroresLexicos(){
+    return listadoErroresLexicos;
+  }
+
+  //Obtenemos el lstado de los tokens
+  public ArrayList<Token> obtenerListadoTokens(){
     return listadoOperadoresInvocados;
   }
 
@@ -690,7 +706,7 @@ public class exercise implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-          {
+          { addErrorLexico ("LEXICO", yytext(), "Token inexistente en el lenguaje",yyline + 1, yycolumn + 1);
           }
           // fall through
           case 22: break;
