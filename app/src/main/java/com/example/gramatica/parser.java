@@ -207,8 +207,8 @@ public class parser extends java_cup.runtime.lr_parser {
   //Se instancia un listado de las figuras a graficar
   private ArrayList<Figura> listadoFiguras = new ArrayList();
   private ArrayList<TokenError> listadoErroresSintacticos = new ArrayList();
-  private String[] mensajes = {"Fin del archivo",	//0
-          "Error",			//1
+  private String[] mensajes = {" ",	//0
+          " ",			//1
           "numero (0 a 9)",	//2
           "'+'",				//3
           "'-'",				//4
