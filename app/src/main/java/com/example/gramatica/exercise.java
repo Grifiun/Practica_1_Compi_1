@@ -706,7 +706,7 @@ public class exercise implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-          { addErrorLexico ("LEXICO", yytext(), "Token inexistente en el lenguaje",yyline + 1, yycolumn + 1);
+          { addErrorLexico ("LEXICO", yytext(), "Token no valido",yyline + 1, yycolumn + 1);
           }
           // fall through
           case 22: break;

@@ -13,7 +13,6 @@ import org.w3c.dom.ls.LSOutput;
 
 
 public class SeccionesPagina extends FragmentPagerAdapter {
-    private static final String ARG_SECTION_NUMBER = "section_number";
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;

@@ -1,0 +1,209 @@
+package com.example.gramatica;
+import java_cup.runtime.*;
+import com.example.gramatica.sym;
+import com.example.gramatica.exercise;
+import com.example.DAO.*;
+import java.util.ArrayList;
+import java.util.List;
+
+parser code{:
+    //Se instancia un listado de las figuras a graficar
+    private ArrayList<Figura> listadoFiguras = new ArrayList();
+	private ArrayList<TokenError> listadoErroresSintacticos = new ArrayList();
+	private String[] mensajes = {"Fin del archivo",	//0
+								"Error",			//1
+							 	"numero (0 a 9)",	//2
+								"'+'",				//3
+								"'-'",				//4
+								"'*'",				//5
+								"'/'",				//6
+								"'('",				//7
+								"')'",				//8
+								"','",				//9
+								"un color",			//10
+								"curva", 			//11
+								"circulo",			//12
+								"cuadrado",			//13
+								"rectangulo",		//14
+								"linea",			//15
+								"poligono",			//16
+								"graficar",			//17
+								"animar",			//18
+								"objeto",			//19
+								"anterior"};		//20
+
+	//Controlador de error sintactico
+	@Override
+	public void syntax_error(Symbol a){
+		System.out.println("error de sintaxis");
+		String msgError = "Se esperaba: ";
+		Token tokenError = (Token) a.value;//lo transformamos en token para obtener su lexema, fila y columna
+		
+		 for(int i = 0; i < expected_token_ids().size(); i++){
+			msgError = msgError + mensajes[expected_token_ids().get(i)];
+			if(i < expected_token_ids().size() - 1)
+				msgError = msgError + ", ";			
+		}
+		//recibe tipo error, lexema error, mensaje, linea, columna
+		TokenError tokenErrorAux = new TokenError("SINTACTICO", tokenError.getLexema(), msgError, tokenError.getLinea(), tokenError.getColumna());
+		listadoErroresSintacticos.add(tokenErrorAux);
+
+	}
+
+	public ArrayList<Figura> getListadoFiguras(){
+		return listadoFiguras;
+	}
+
+	public ArrayList<TokenError> getListadoErroresSintacticos(){
+		return listadoErroresSintacticos;
+	}
+
+
+    public parser(exercise lex){
+        super(lex);
+    }
+:}
+
+//TOKENS TERMINALES
+terminal Token ENTERO;
+
+//PALABRAS RESERVADAS
+
+terminal Token SUMA;
+terminal Token RESTA;
+terminal Token MULTIPLICACION;
+terminal Token DIVISION;
+terminal Token PARENTESISA;
+terminal Token PARENTESISB;
+terminal Token COMA;
+terminal Token COLOR;
+terminal Token CURVA;
+terminal Token CIRCULO;
+terminal Token CUADRADO;
+terminal Token RECTANGULO;
+terminal Token LINEA;
+terminal Token POLIGONO;
+terminal Token GRAFICAR;
+terminal Token ANIMAR;
+terminal Token OBJETO;
+terminal Token ANTERIOR;
+
+non terminal s;
+non terminal graficar;
+non terminal tipoanimacion;
+
+//Agregamos que sea de tipo String para obtener el producto
+non terminal String producto;
+
+///precedencia
+precedence left SUMA, RESTA;
+precedence left MULTIPLICACION, DIVISION;
+
+start with s;
+s ::= graficar
+    | graficar s  
+	;
+graficar ::= GRAFICAR CIRCULO PARENTESISA producto:posX COMA producto:posY COMA producto:radio COMA COLOR:color PARENTESISB
+	{:
+		Figura aux = new Circulo(color.getLexema(), 
+					Double.parseDouble(posX),
+					Double.parseDouble(posY),
+					Double.parseDouble(radio));
+		listadoFiguras.add(aux);
+	:}
+    | GRAFICAR CUADRADO PARENTESISA producto:posX COMA producto:posY COMA producto:longitudLado COMA COLOR:color PARENTESISB
+    {:
+		Figura aux = new Cuadrado(color.getLexema(), 
+					Double.parseDouble(posX),
+					Double.parseDouble(posY),
+					Double.parseDouble(longitudLado));
+		listadoFiguras.add(aux);
+	:}
+    | GRAFICAR RECTANGULO PARENTESISA producto:posX COMA producto:posY COMA producto:alto COMA producto:ancho COMA COLOR:color PARENTESISB
+    {:
+		Figura aux = new Rectangulo(color.getLexema(), 
+					Double.parseDouble(posX),
+					Double.parseDouble(posY),
+					Double.parseDouble(alto),
+					Double.parseDouble(ancho));
+		listadoFiguras.add(aux);
+	:}
+    | GRAFICAR LINEA PARENTESISA producto:posX COMA producto:posY COMA producto:posX1 COMA producto:posY1 COMA COLOR:color PARENTESISB
+   	{:
+		Figura aux = new Linea(color.getLexema(), 
+					Double.parseDouble(posX),
+					Double.parseDouble(posY),
+					Double.parseDouble(posX1),
+					Double.parseDouble(posY1));
+		listadoFiguras.add(aux);
+	:}
+    | GRAFICAR POLIGONO PARENTESISA producto:posX COMA producto:posY COMA producto:alto COMA producto:ancho COMA producto:cantidadLados COMA COLOR:color PARENTESISB
+    {:
+		Figura aux = new Poligono(color.getLexema(), 
+					Double.parseDouble(posX),
+					Double.parseDouble(posY),
+					Double.parseDouble(alto),
+					Double.parseDouble(ancho),
+					Double.parseDouble(cantidadLados));
+		listadoFiguras.add(aux);
+	:}
+	| graficar ANIMAR OBJETO ANTERIOR PARENTESISA producto COMA producto COMA tipoanimacion PARENTESISB 
+	{:
+		//CODIGO ANIMAR FIGURA	
+	:}
+	| error {:	System.out.println(" Error sintactico del grupo de tokens para graficar figuras "); :}
+	;
+producto ::= producto:n1 SUMA producto:n2 
+	{: 
+		//System.out.print(" + "); 
+		Double num1 = Double.parseDouble(n1);
+        	Double num2 = Double.parseDouble(n2);
+        	Double aux = num1 + num2;
+        	RESULT = String.valueOf(aux);		
+	:}	
+    | producto:n1 RESTA producto:n2
+    {: 
+		//System.out.print(" - "); 
+		Double num1 = Double.parseDouble(n1);
+        	Double num2 = Double.parseDouble(n2);
+        	Double aux = num1 - num2;
+        	RESULT = String.valueOf(aux);		
+	:}
+    | producto:n1 MULTIPLICACION producto:n2 
+    {: 
+		//System.out.print(" * "); 
+		Double num1 = Double.parseDouble(n1);
+        	Double num2 = Double.parseDouble(n2);
+        	Double aux = num1 * num2;
+        	RESULT = String.valueOf(aux);		
+	:}
+    | producto:n1 DIVISION producto:n2
+    {: 
+		//System.out.print(" / "); 
+		Double num1 = Double.parseDouble(n1);
+        	Double num2 = Double.parseDouble(n2);
+        	Double aux = num1 / num2;
+        	RESULT = String.valueOf(aux);		
+	:}
+    | PARENTESISA producto:p 
+    {: 
+		//System.out.print(" ( )"); 
+        	RESULT = p;		
+	:}
+	PARENTESISB
+    | ENTERO:e
+    {: 
+		//System.out.print(" Entero"); 
+        	RESULT = e.getLexema();		
+	:}
+    | RESTA producto:n1
+    {: 
+		//System.out.print(" Entero negativo "); 
+		double auxNum = Double.parseDouble(n1);
+		auxNum = auxNum * -1; //le cambiamos el signo
+        	RESULT = Double.toString(auxNum); //transofmramos a String y lo pasamos al result
+	:}	
+    ;    
+tipoanimacion ::= LINEA
+    | CURVA
+    ;
