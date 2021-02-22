@@ -73,12 +73,15 @@ public class Visualizador extends Fragment {
                     //Preparamos los datos de las tablas
                     prepararDatosTabla(lexico.obtenerListadoTokens());
                     //preparar Datos lexicos
-                    prepararErroresTabla(lexico.obtenerListadoErroresLexicos());
+                    prepararErroresTabla(lexico.obtenerListadoErroresLexicos(), "lexicos");
+                    System.out.println("tamo errorres lexicos: "+lexico.obtenerListadoErroresLexicos().size());
+                    //preparar Datos sintacticos
+                    prepararErroresTabla(pars.getListadoErroresSintacticos(), "sintacticos");
                     //Enviamos los datos e
                     // mpaquetados
                     enviarPaqueteDatos();
                     //Graficar
-                    graficarListadoFiguras(pars.listadoFiguras, parent);
+                    graficarListadoFiguras(pars.getListadoFiguras(), parent);
                 } catch (Exception ex) {
                     System.out.println("Error irrecuperrable: "+ex);
                 }
@@ -154,7 +157,7 @@ public class Visualizador extends Fragment {
                 ocurrencia = valorAntes + tokenAux.getLexema() +valorDespues;
                 operadorAuxiliar = operadorAuxiliar + ocurrencia; //OCURRENCIA
 
-                //agregamos al listado de operadores
+                //agregamos los operadores
                 listadoOperadores.add(operadorAuxiliar);
             }else if(tokenAux.getTipoToken().equals("COLOR")){//Se verifica si son colores
                 colores = colores + " "+tokenAux.getLexema();
@@ -188,31 +191,26 @@ public class Visualizador extends Fragment {
      * Preparamos el listado de errores lexicos
      * @param listadoTokens
      */
-    private  void prepararErroresTabla(ArrayList<TokenError> listadoTokens){
-        ArrayList<String> erroresLexicos = new ArrayList<>();
+    private  void prepararErroresTabla(ArrayList<TokenError> listadoTokens, String tipoErrores){
+        ArrayList<String> errores = new ArrayList<>();
 
         for(int i = 0; i < listadoTokens.size(); i++){
             //Auxiliar de los tokens
-            TokenError tokenAux = listadoTokens.get(i);
-            //Si el token es un operador, lo agregamos al listado de errores lexicos
-            if(tokenAux.getTipoToken().equals("LEXICO")){
-
-                //creamos el auxiliar
-                String lexicoAuxiliar = "";
-                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getTipoToken() + "@";                  // TIPO ERROR (LEXEMA)
-                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getLexema()+ "@";                      // Valor del token
-                lexicoAuxiliar = lexicoAuxiliar + String.valueOf(tokenAux.getLinea()) + "@";      // LINEA
-                lexicoAuxiliar = lexicoAuxiliar + String.valueOf(tokenAux.getColumna()) + "@";    // COLUMNA
-                lexicoAuxiliar = lexicoAuxiliar + tokenAux.getMsgError();                    // mensaje de error del token
+            TokenError tokenAux = listadoTokens.get(i);//creamos el auxiliar
+            String auxiliar = "";
+            //lexicoAuxiliar = lexicoAuxiliar + tokenAux.getTipoToken() + "@";                  // TIPO ERROR (LEXEMA)
+            auxiliar = auxiliar + tokenAux.getLexema()+ "@";                      // Valor del token
+            auxiliar = auxiliar + String.valueOf(tokenAux.getLinea()) + "@";      // LINEA
+            auxiliar = auxiliar + String.valueOf(tokenAux.getColumna()) + "@";    // COLUMNA
+            auxiliar = auxiliar + tokenAux.getMsgError();                    // mensaje de error del token
 
 
-                //agregamos al listado de errores lexicos
-                erroresLexicos.add(lexicoAuxiliar);
-            }
+            //agregamos al listado de errores lexicos
+            errores.add(auxiliar);
         }
 
         //agregamos al bunlde
-        datosEnviar.putStringArrayList("lexicos", erroresLexicos);
+        datosEnviar.putStringArrayList(tipoErrores, errores);
     }
 
     /**

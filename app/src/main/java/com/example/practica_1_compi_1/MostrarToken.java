@@ -39,9 +39,10 @@ public class MostrarToken extends Fragment {
     private ArrayList<String[]> datosFiguras = new ArrayList<>();
     private ArrayList<String[]> datosAnimacion = new ArrayList<>();
     private ArrayList<String[]> datosLexicos = new ArrayList<>();
-    private String[] titulos = {"Tokens operador", "Tokens color", "Tokens figuras", "Tokens animaciones", "Errores lexicos"};
+    private ArrayList<String[]> datosSintacticos = new ArrayList<>();
+    private String[] titulos = {"Tokens operador", "Tokens color", "Tokens figuras", "Tokens animaciones", "Errores lexicos", "Errores sintacticos"};
 
-    private ArrayList<String> operadores, colores, figuras, animaciones, lexicos;
+    private ArrayList<String> operadores, colores, figuras, animaciones, lexicos, sintacticos;
 
     public MostrarToken(Context mContext) {
         // Required empty public constructor
@@ -66,12 +67,14 @@ public class MostrarToken extends Fragment {
                 datosFiguras.clear();
                 datosAnimacion.clear();
                 datosLexicos.clear();
+                datosSintacticos.clear();
 
                 operadores = result.getStringArrayList("operadores");//Obtenemos los operadores
                 colores = result.getStringArrayList("colores");//Obtenemos los colores
                 figuras = result.getStringArrayList("figuras");//Obtenemos las figuras
                 animaciones = result.getStringArrayList("animaciones");//Obtenemos las animaciones
                 lexicos = result.getStringArrayList("lexicos");//Obtenemos los errores lexicos
+                sintacticos = result.getStringArrayList("sintacticos");//Obtenemos los errores lexicos
 
                 cargarDatosTabla(indexTabla);
             }
@@ -129,6 +132,13 @@ public class MostrarToken extends Fragment {
                 }
                 tabOperador.setDatos(datosLexicos);
                 break;
+            case 5://Reporte de errores sintacticos
+                if(datosSintacticos.isEmpty()){//si esta vacio
+                    System.out.println("\nCARGA sintacticos");
+                    datosSintacticos = obtenerDatosTabla(sintacticos);
+                }
+                tabOperador.setDatos(datosSintacticos);
+                break;
         }
 
     }
@@ -154,7 +164,8 @@ public class MostrarToken extends Fragment {
         encabezados.add(new String[] {"Color", "Cantidad de usos"});
         encabezados.add(new String[] {"Objeto", "Cantidad de usos"});
         encabezados.add(new String[] {"Animacion", "Cantidad de usos"});
-        encabezados.add(new String[] {"Error", "Lexema", "Fila", "Columna", "descripcion"});
+        encabezados.add(new String[] {"Lexema", "Fila", "Columna", "descripcion"});
+        encabezados.add(new String[] {"Lexema", "Fila", "Columna", "descripcion"});
     }
 
     @Override
@@ -176,7 +187,7 @@ public class MostrarToken extends Fragment {
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(indexTabla == 4){
+                if(indexTabla == 5){
                     indexTabla = 0;
                 }else{
                     indexTabla++;

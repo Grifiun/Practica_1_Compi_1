@@ -1,10 +1,10 @@
 package com.example.DAO;
 
 public class Token {
-    private final String lexema;
+    private String lexema;
     private String tipoToken;
-    private final int linea;
-    private final int columna;
+    private int linea;
+    private int columna;
 
     /**
      * Constructor de los tokens

@@ -18,10 +18,6 @@ public class TablaGenerica {
     private ArrayList<String[]> datos;
     private TableRow filaTabla;
     private TextView celda;
-
-    private boolean multiColor = false;
-    int firtColor, secondColor, textColor, colorLinea;
-
     /**
      * Obtenemos el contexto y la tabla
      * @param tabla
@@ -38,6 +34,7 @@ public class TablaGenerica {
         celda.setGravity(Gravity.CENTER);
         //tamano
         celda.setTextSize(15);
+        celda.setWidth(400/(encabezado.length));
     }
 
     /**
